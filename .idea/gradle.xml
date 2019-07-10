@@ -8,6 +8,16 @@
         </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/ejml-0.25" />
+            <option value="$PROJECT_DIR$/javafx.base" />
+            <option value="$PROJECT_DIR$/jblas" />
+            <option value="$PROJECT_DIR$/yeppp-bundle" />
+          </set>
+        </option>
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>

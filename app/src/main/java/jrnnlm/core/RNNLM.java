@@ -1,6 +1,8 @@
 package jrnnlm.core;
 
-import javafx.util.Pair;
+
+import android.util.Pair;
+
 import jrnnlm.core.scanner.FileScanner;
 import jrnnlm.core.scanner.RawScanner;
 import jrnnlm.core.scanner.WordIndexScanner;
@@ -243,9 +245,9 @@ public class RNNLM {
 
             // Valid
             Pair<Double, Integer> entropyCountPair = estimate(validScanner);
-            logp = entropyCountPair.getKey();
+            logp = entropyCountPair.first;
 
-            Logger.info(String.format("Iter: %d, VALID entropy: %.4f, PPL: %.4f", iterNumber, -logp/Math.log10(2)/entropyCountPair.getValue(), Math.log10(-logp/entropyCountPair.getValue())));
+            Logger.info(String.format("Iter: %d, VALID entropy: %.4f, PPL: %.4f", iterNumber, -logp/Math.log10(2)/entropyCountPair.second, Math.log10(-logp/entropyCountPair.second)));
 
 
             // Ending
@@ -256,7 +258,7 @@ public class RNNLM {
                 }
                 else {
                     // Exit training
-                    entroy = -lastlogp/Math.log10(2)/entropyCountPair.getValue();
+                    entroy = -lastlogp/Math.log10(2)/entropyCountPair.second;
                     break;
                 }
 
@@ -405,7 +407,7 @@ public class RNNLM {
 
         // hidden -> (sigmoid) -> hidden
         if (conf.fastMath) {
-            FastMath.fastSigmoid(hiddenLayer.neurons);
+            FastMath.sigmoid(hiddenLayer.neurons);
         }
         else {
             FastMath.sigmoid(hiddenLayer.neurons);
@@ -429,7 +431,7 @@ public class RNNLM {
             if (conf.classSize == 0) {
                 if (conf.fastMath) {
                     // TODO: fastSoftmax make convergence slow here, unveiled by SmallFileTest
-                    FastMath.fastSoftmax(outputLayer.neurons);
+                    FastMath.softmax(outputLayer.neurons);
                 }
                 else {
                     FastMath.softmax(outputLayer.neurons);
